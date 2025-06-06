@@ -3,6 +3,7 @@
 //DEPS org.eclipse.jgit:org.eclipse.jgit:7.2.1.202505142326-r
 //DEPS org.eclipse.jgit:org.eclipse.jgit.pgm:7.2.1.202505142326-r
 //DEPS org.kohsuke:github-api:2.0-rc.3
+//DEPS info.picocli:picocli:4.7.7
 //DEPS org.tinylog:tinylog-api:2.7.0
 //DEPS org.tinylog:tinylog-impl:2.7.0
 
@@ -24,17 +25,14 @@ import org.kohsuke.github.GHPullRequest;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 import org.tinylog.Logger;
+import picocli.CommandLine;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
-
-import static java.lang.System.err;
-import static java.lang.System.out;
 
 /// Its aim is to create a merge-commit having the files directly after a squash-merge of a pr into main and the main as well as the pr at that point in time as parent.
 ///
@@ -62,35 +60,27 @@ import static java.lang.System.out;
 /// 1. (with jgit) git checkout {{current branch}}
 /// 1. (with jgit) git merge {{magic-commit-id}}
 /// 1. (with jgit) delete branch "create-merge-commit-support"
-public class CreatePRMergeCommit {
+
+@CommandLine.Command(name = "create-pr-merge-commit",
+        version = "2025-06-06",
+        mixinStandardHelpOptions = true,
+        sortSynopsis = false)
+public class CreatePRMergeCommit implements Callable<Integer> {
 
     private static final String branchNameCreateMergeCommitSupport = "create-merge-commit-support";
 
+    @CommandLine.Parameters(index = "0", paramLabel = "pr-number", description = "The number of the pull request to process")
+    int prNum;
+
     public static void main(String... args) {
-        if (args.length != 1) {
-            Logger.error("Usage: CreatePRMergeCommit <prnum>");
-            System.exit(1);
-        }
-
-        int prNum;
-        try {
-            prNum = Integer.parseInt(args[0]);
-        } catch (NumberFormatException e) {
-            Logger.error("Error: PR number must be an integer");
-            System.exit(1);
-            return;
-        }
-
-        try {
-            createPRMergeCommit(prNum);
-        } catch (Exception e) {
-            Logger.error("Error: {}", e.getMessage());
-            e.printStackTrace();
-            System.exit(1);
-        }
+        CommandLine commandLine = new CommandLine(new CreatePRMergeCommit());
+        commandLine.parseArgs(args);
+        int exitCode = commandLine.execute(args);
+        System.exit(exitCode);
     }
 
-    private static void createPRMergeCommit(int prNum) throws Exception {
+    @Override
+    public Integer call() throws Exception {
         try (Git git = Git.open(new File("."))) {
             Repository repository = git.getRepository();
 
@@ -100,7 +90,7 @@ public class CreatePRMergeCommit {
 
             if (currentBranch.equals(branchNameCreateMergeCommitSupport)) {
                 Logger.warn("You are on the helper branch '{}'. Please switch to the target branch before running this command.", branchNameCreateMergeCommitSupport);
-                System.exit(1);
+                return 1;
             }
 
             if (repository.findRef(branchNameCreateMergeCommitSupport) != null) {
@@ -242,14 +232,15 @@ public class CreatePRMergeCommit {
 
             Logger.info("Successfully created merge commit for PR #" + prNum);
         }
+        return 0;
     }
 
-    private static void deleteSupportBranch(Git git) throws GitAPIException {
+    private void deleteSupportBranch(Git git) throws GitAPIException {
         git.branchDelete().setBranchNames(branchNameCreateMergeCommitSupport).setForce(true).call();
         Logger.info("Deleted temporary branch create-merge-commit-support");
     }
 
-    private static String runJGitPgmCommand(String... args) throws Exception {
+    private String runJGitPgmCommand(String... args) throws Exception {
         // Save the original System.out
         PrintStream originalOut = System.out;
 
