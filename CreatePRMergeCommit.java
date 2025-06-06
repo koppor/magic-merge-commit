@@ -1,7 +1,7 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //JAVA 21+
 //DEPS org.eclipse.jgit:org.eclipse.jgit:7.2.1.202505142326-r
-//DEPS org.eclipse.jgit:org.eclipse.jgit.pgm:7.2.1.202505142326-r
+//DEPS org.eclipse.jgit:org.eclipse.jgit.pgm:7.3.0.202506031305-r
 //DEPS org.kohsuke:github-api:2.0-rc.3
 //DEPS info.picocli:picocli:4.7.7
 //DEPS org.tinylog:tinylog-api:2.7.0
@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
 /// - jbang
 /// - Java 21+
 /// - eclipse jgit
-/// - eclipse jgit's pgm: org.eclipse.jgit.pgm.Main.main(args) -> //DEPS org.eclipse.jgit:org.eclipse.jgit.pgm:7.2.1.202505142326-r
+/// - eclipse jgit's pgm: org.eclipse.jgit.pgm.Main.main(args) -> //DEPS org.eclipse.jgit:org.eclipse.jgit.pgm:7.3.0.202506031305-r
 /// - hub4j -> //DEPS org.kohsuke:github-api:2.0-rc.3
 ///
 /// 1. (with jgit) store current branch in variable: {{current branch}}
