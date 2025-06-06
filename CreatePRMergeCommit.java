@@ -209,7 +209,7 @@ public class CreatePRMergeCommit {
             }
 
             // 13. Create commit-tree with both parents using pgm
-            String commitMessageMagicMergeCommit = "Magic mere commit for PR #" + prNum;
+            String commitMessageMagicMergeCommit = "Magic merge commit for PR #" + prNum;
             ObjectId magicCommitId;
             try (ObjectInserter inserter = repository.newObjectInserter()) {
                 CommitBuilder commitBuilder = new CommitBuilder();
@@ -232,7 +232,7 @@ public class CreatePRMergeCommit {
             // 15. Merge magic commit
             mergeResult = git.merge()
                     .include(magicCommitId)
-                    .setMessage("Merge " + commitMessageMagicMergeCommit)
+                    .setMessage("Merge into " + currentBranch)
                     .setFastForward(MergeCommand.FastForwardMode.NO_FF)
                     .call();
             Logger.info("Merged magic commit: {}", mergeResult.getMergeStatus());
