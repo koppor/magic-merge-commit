@@ -1,6 +1,6 @@
 # Create Magic Merge Commit
 
-Ever build on a branch which was squashed-merged into `main` and then you wanted to merge a pull request that was based on that branch? You know, the one that has a commit that conflicts with the squashed commit in `main`?
+Ever build on a branch which meanwhile was squashed-merged into `main` and then you wanted to merge a pull request that was based on that branch? You know, the one that has a commit that conflicts with the squashed commit in `main`?
 
 This tool creates a "magic" merge commit that resolves the conflict by connecting the two branches together, allowing you to merge without conflicts.
 
