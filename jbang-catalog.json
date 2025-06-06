@@ -1,0 +1,10 @@
+{
+  "catalogs": {},
+  "aliases": {
+    "do": {
+      "script-ref": "CreatePRMergeCommit.java",
+      "java-agents": []
+    }
+  },
+  "templates": {}
+}
