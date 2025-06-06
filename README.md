@@ -19,21 +19,25 @@ If you don't want to install jbang, place [`gg.cmd`](https://github.com/eirikb/g
 
 ## Visualization of the process
 
-### 1. First PR is created
+### 1. First pull request is created
 
 The pull request starts with one commit.
 
 ![First PR](img/01%20-%20first%20pr.png)
 
-### 2. Add a second commit to the PR
+### 2. Second pull request is created
 
-A second PR is created, based on the first one, which is still opened.
+Another improvement is needed.
+It should be reviewed separate pull request, but needs the first pull reuqest.
+
+Therefore, a new branch is created and a commit is added to it.
+Finally, a second pull request is created, based on the first one, which is still opened.
 
 ![Second Commit](img/02%20-%20add%20second%20commit.png)
 
-### 3. First PR is merged in to `main`
+### 3. First pull request is merged in to `main`
 
-![First PR Merged](img/03%20-%20first%20PR%20merged.png)
+![First PR Merged](img/03%20-%20first%20pr%20merged.png)
 
 ### 4. `main` branch has its own commit
 
@@ -43,13 +47,13 @@ The conflicting change in `main`.
 
 ### 5. Conflict Arises with the `main` branch
 
-The second commit in the PR conflicts with the `main` branch, which has its own commit.
+The second commit in the pull request conflicts with the `main` branch, which has its own commit.
 
 ![Conapsflict with main](img/05%20-%20conflict%20with%20main%20branch.png)
 
 ### 6. Conflicting state visualized with gitk
 
-The first PR was added as commit to the `main` branch.
+The first pull request was added as commit to the `main` branch.
 There is no git merge commit and there is no git connect with the pull request.
 The only indicator is `#1` in the commit message.
 
