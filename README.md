@@ -4,7 +4,18 @@ Ever build on a branch which was squashed-merged into `main` and then you wanted
 
 This tool creates a "magic" merge commit that resolves the conflict by connecting the two branches together, allowing you to merge without conflicts.
 
+Execute is with following command:
 
+```terminal
+jbang do@koppor/magic-merge-commit <pr-number>
+```
+
+For this, you need to have [jbang](https://www.jbang.dev/) installed.
+
+If you don't want to install jbang, place [`gg.cmd`](https://github.com/eirikb/gg#ggcmd) into the root of your git repository and execute as follows:
+
+- Linux/macOS: `sh ./gg.cmd jbang do@koppor/magic-merge-commit <pr-number>`
+- Windows: `.\gg.cmd jbang do@koppor/magic-merge-commit <pr-number>`
 
 ## Visualization of the process
 
@@ -51,8 +62,14 @@ This commit "magically" resolves the conflict by wiring the two branches togethe
 
 ![Magic Commit](img/07%20-%20magic%20commit.png)
 
-### 8. Merge Without Conflicts
+### 8. Merge without conflicts
 
 This "magic" merge commit now merges cleanly.
 
 ![No Conflicts](img/08%20-%20no%20conflicts.png)
+
+## More information
+
+- `gitk` was used to visualize the commits. Learn more about it at [lostechies](https://lostechies.com/joshuaflanagan/2010/09/03/use-gitk-to-understand-git/).
+- The scenario is available at [squash-merge-demo](https://github.com/koppor/squash-merge-demo).
+- Background is available at [a blog post](https://blog.flupp.de/posts/git-and-squashed-prs/).
