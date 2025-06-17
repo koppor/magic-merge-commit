@@ -101,7 +101,12 @@ public class CreatePRMergeCommit implements Callable<Integer> {
             GitHub github = new GitHubBuilder().fromEnvironment().build();
 
             // Extract repo info from remote URL
-            String remoteUrl = git.remoteList().call().get(0).getURIs().get(0).toString();
+            String remoteUrl = git.remoteList().call().stream()
+                .filter(config -> config.getName().equals("origin"))
+                .findFirst()
+                .map(config -> config.getURIs())
+                .map(uris -> uris.getFirst().toASCIIString())
+                .orElseThrow(() -> new Exception("No remote origin found"));
             String[] urlParts = remoteUrl.split("[:/]");
             String repoOwner = urlParts[urlParts.length - 2];
             String repoName = urlParts[urlParts.length - 1];
