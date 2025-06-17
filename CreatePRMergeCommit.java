@@ -12,6 +12,7 @@
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.MergeCommand;
 import org.eclipse.jgit.api.MergeResult;
+import org.eclipse.jgit.api.MergeResult.MergeStatus;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.ObjectId;
@@ -62,7 +63,7 @@ import java.util.regex.Pattern;
 /// 1. (with jgit) delete branch "create-merge-commit-support"
 
 @CommandLine.Command(name = "create-pr-merge-commit",
-        version = "2025-06-06",
+        version = "2025-06-17",
         mixinStandardHelpOptions = true,
         sortSynopsis = false)
 public class CreatePRMergeCommit implements Callable<Integer> {
@@ -231,6 +232,11 @@ public class CreatePRMergeCommit implements Callable<Integer> {
                     .setFastForward(MergeCommand.FastForwardMode.NO_FF)
                     .call();
             Logger.info("Merged magic commit: {}", mergeResult.getMergeStatus());
+
+            if (mergeResult.getMergeStatus() != MergeStatus.MERGED) {
+                Logger.error("Not merged");
+                return 1;
+            }
 
             // 16. Delete temporary branch
             deleteSupportBranch(git);
