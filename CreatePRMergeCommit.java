@@ -18,6 +18,7 @@ import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectInserter;
 import org.eclipse.jgit.lib.PersonIdent;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.pgm.Main;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -123,7 +124,8 @@ public class CreatePRMergeCommit implements Callable<Integer> {
             Logger.info("PR last commit: {}", prLastCommit);
 
             // 4. Fetch from origin using pgm
-            runJGitPgmCommand("fetch", "origin");
+            String runResult = runJGitPgmCommand("fetch", "origin");
+            Logger.info(runResult);
 
             // 5. Checkout PR branch
             try {
@@ -138,11 +140,16 @@ public class CreatePRMergeCommit implements Callable<Integer> {
 
             // 6. Merge origin/prBranch (if it exists)
             try {
-                MergeResult mergeResult = git.merge()
-                        .include(repository.findRef("refs/remotes/origin/" + prBranch))
-                        .setFastForward(MergeCommand.FastForwardMode.NO_FF)
-                        .call();
-                Logger.info("Merged origin/{}: {}", prBranch, mergeResult.getMergeStatus());
+                Ref originPrBranch = repository.findRef("refs/remotes/origin/" + prBranch);
+                if (originPrBranch == null) {
+                    Logger.info("origin/{} does not exist. Not updating", prBranch);
+                } else {
+                    MergeResult mergeResult = git.merge()
+                            .include(originPrBranch)
+                            .setFastForward(MergeCommand.FastForwardMode.NO_FF)
+                            .call();
+                    Logger.info("Merged origin/{}: {}", prBranch, mergeResult.getMergeStatus());
+                }
             } catch (Exception e) {
                 Logger.info("Could not merge origin/{}: {}", prBranch, e.getMessage());
                 // Continue if the branch doesn't exist remotely
