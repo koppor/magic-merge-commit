@@ -28,7 +28,7 @@ jobs:
       - name: Use cache
         uses: actions/cache@v4
         with:
-          path: ~/.jbang
+          path: /jbang/.jbang/
           key: ${{ steps.cache-key.outputs.cache_key }}
           restore-keys:
             jbang-
