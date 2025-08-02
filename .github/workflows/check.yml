@@ -20,18 +20,6 @@ jobs:
         with:
           fetch-depth: '0'
           show-progress: 'false'
-      - name: Generate JBang cache key
-        id: cache-key
-        shell: bash
-        run: |
-          echo "cache_key=jbang-$(date +%F)" >> $GITHUB_OUTPUT
-      - name: Use cache
-        uses: actions/cache@v4
-        with:
-          path: /jbang/.jbang/
-          key: ${{ steps.cache-key.outputs.cache_key }}
-          restore-keys:
-            jbang-
       - name: jbang
         uses: jbangdev/jbang-action@v0.128.7
         with:
