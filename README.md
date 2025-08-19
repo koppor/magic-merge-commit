@@ -1,23 +1,27 @@
 # Create Magic Merge Commit
 
-Ever build on a branch which meanwhile was squashed-merged into `main` and then you wanted to merge a pull request that was based on that branch? You know, the one that has a commit that conflicts with the squashed commit in `main`?
+Have you ever created a branch based on another branch?
+Then that other branch got [squash-merged](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github#squashing-your-merge-commits) into `main`.
+Now your pull request, which was based on that branch, can’t merge cleanly because Git sees your old commit as conflicting with the squashed commit in main?
 
-This tool creates a "magic" merge commit that resolves the conflict by connecting the two branches together, allowing you to merge without conflicts.
+This tool generates a special merge commit that links your branch to the squashed history in `main`, eliminating the conflict and letting you merge `main` without trouble.
 
-Execute is with following command:
+Execute the tool with following command:
 
 ```terminal
 jbang do@koppor/magic-merge-commit <pr-number>
 ```
 
-For this, you need to have [jbang](https://www.jbang.dev/) installed.
+## Installation
+
+To have `jbang` working, you need to install it. Find information at the [jbang page](https://www.jbang.dev/).
 
 If you don't want to install jbang, place [`gg.cmd`](https://github.com/eirikb/gg#ggcmd) into the root of your git repository and execute as follows:
 
 - Linux/macOS: `sh ./gg.cmd jbang do@koppor/magic-merge-commit <pr-number>`
 - Windows: `.\gg.cmd jbang do@koppor/magic-merge-commit <pr-number>`
 
-## Visualization of the process
+## Step-by-step description of the scenario
 
 ### 1. First pull request is created
 
