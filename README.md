@@ -74,6 +74,7 @@ This "magic" merge commit now merges cleanly.
 
 ## More information
 
+- The tool [`gh-cherry-pick`](gh-cherry-pick) is a GitHub CLI extension allowing to `gh cherry-pick -pr <pr-number> -onto <target_banch>` allows to cherry-pick PRs into unrelated branches.
 - `gitk` was used to visualize the commits. Learn more about it at [lostechies](https://lostechies.com/joshuaflanagan/2010/09/03/use-gitk-to-understand-git/).
 - The scenario is available at [squash-merge-demo](https://github.com/koppor/squash-merge-demo).
 - Background is available at [a blog post](https://blog.flupp.de/posts/git-and-squashed-prs/).
