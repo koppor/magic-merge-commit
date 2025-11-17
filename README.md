@@ -12,6 +12,9 @@ Execute the tool with following command:
 jbang do@koppor/magic-merge-commit <pr-number>
 ```
 
+`<pr-number>` is the number of the pull request which was squashed-merged into main.
+You need to be on the branch which is base on the pull request indicated by `<pr-number>`.
+
 ## Installation
 
 To have `jbang` working, you need to install it. Find information at the [jbang page](https://www.jbang.dev/).
