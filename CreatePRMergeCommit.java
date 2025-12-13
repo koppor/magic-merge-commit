@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //JAVA 21+
-//DEPS org.eclipse.jgit:org.eclipse.jgit:7.4.0.202509020913-r
+//DEPS org.eclipse.jgit:org.eclipse.jgit:7.5.0.202512021534-r
 //DEPS org.eclipse.jgit:org.eclipse.jgit.pgm:7.5.0.202512021534-r
 //DEPS org.kohsuke:github-api:2.0-rc.5
 //DEPS info.picocli:picocli:4.7.7
