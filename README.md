@@ -24,6 +24,20 @@ If you don't want to install jbang, place [`gg.cmd`](https://github.com/eirikb/g
 - Linux/macOS: `sh ./gg.cmd jbang do@koppor/magic-merge-commit <pr-number>`
 - Windows: `.\gg.cmd jbang do@koppor/magic-merge-commit <pr-number>`
 
+## Use as a Claude Code skill
+
+This repository is also a [Claude Code plugin](https://docs.claude.com/en/docs/claude-code/plugins).
+Install it so Claude runs the tool for you when it detects a squash-merge conflict:
+
+```terminal
+/plugin marketplace add koppor/magic-merge-commit
+/plugin install magic-merge-commit@magic-merge-commit
+```
+
+The skill still requires `jbang` (or `gg.cmd`) and a `GITHUB_TOKEN` environment
+variable on your machine — it tells Claude *when* and *how* to invoke the tool,
+it does not bundle the tool itself.
+
 ## Step-by-step description of the scenario
 
 ### 1. First pull request is created

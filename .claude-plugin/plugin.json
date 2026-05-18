@@ -1,0 +1,11 @@
+{
+  "name": "magic-merge-commit",
+  "description": "Fix a Git merge conflict caused by a squash-merged base branch. Wraps the jbang-based magic-merge-commit tool.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Oliver Kopp"
+  },
+  "homepage": "https://github.com/koppor/magic-merge-commit",
+  "repository": "https://github.com/koppor/magic-merge-commit",
+  "keywords": ["git", "merge", "squash", "conflict", "pull-request"]
+}

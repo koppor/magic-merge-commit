@@ -1,0 +1,16 @@
+{
+  "name": "magic-merge-commit",
+  "owner": {
+    "name": "koppor"
+  },
+  "metadata": {
+    "description": "Marketplace hosting the magic-merge-commit Claude Code plugin."
+  },
+  "plugins": [
+    {
+      "name": "magic-merge-commit",
+      "source": "./",
+      "description": "Fix Git merge conflicts caused by a squash-merged base branch."
+    }
+  ]
+}
