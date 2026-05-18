@@ -19,7 +19,7 @@ You need to be on the branch which is base on the pull request indicated by `<pr
 
 To have `jbang` working, you need to install it. Find information at the [jbang page](https://www.jbang.dev/).
 
-If you don't want to install jbang, place [`gg.cmd`](https://github.com/eirikb/gg#ggcmd) into the root of your git repository and execute as follows:
+If you don't want to install jbang, this repository already ships [`gg.cmd`](https://github.com/eirikb/gg#ggcmd) in its root. Execute as follows:
 
 - Linux/macOS: `sh ./gg.cmd jbang do@koppor/magic-merge-commit <pr-number>`
 - Windows: `.\gg.cmd jbang do@koppor/magic-merge-commit <pr-number>`
