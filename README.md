@@ -13,7 +13,7 @@ jbang do@koppor/magic-merge-commit <pr-number>
 ```
 
 `<pr-number>` is the number of the pull request which was squashed-merged into main.
-You need to be on the branch which is base on the pull request indicated by `<pr-number>`.
+You need to be on the branch which is based on the pull request indicated by `<pr-number>`.
 
 ## Installation
 
