@@ -22,6 +22,11 @@ All of the following are true:
 - That other PR was **squash-merged** into `main`.
 - Merging `main` into the current branch now conflicts.
 
+Typical case: a [GitHub stacked pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-stacked-pull-requests).
+The bottom layer gets squash-merged into `main`, and the layer above it — whose
+branch still carries the pre-squash commits — no longer merges `main` cleanly.
+Run this skill in the upper layer's worktree with the bottom PR's number.
+
 ## Prerequisites (verify before running)
 
 1. `jbang` is on `PATH`. If not, a `gg.cmd` file in the repository root works
