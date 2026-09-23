@@ -4,7 +4,7 @@
 //DEPS org.eclipse.jgit:org.eclipse.jgit.pgm:7.7.1.202607240634-r
 //DEPS org.kohsuke:github-api:2.0-rc.7
 //DEPS info.picocli:picocli:4.7.7
-//DEPS org.tinylog:tinylog-api:2.7.0
+//DEPS org.tinylog:tinylog-api:2.8.0
 //DEPS org.tinylog:tinylog-impl:2.7.0
 
 //FILES tinylog.properties
